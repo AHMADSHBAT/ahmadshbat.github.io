@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- HERO TEXT TYPING ANIMATION ----
     const typingSpan = document.querySelector('.typing-text');
-    const roles = ["Software Engineer", "Full Stack Developer", "Open Source Enthusiast", "Problem Solver"];
+    const roles = ["Embedded Software Engineer", "Systems Architect", "Machine Learning Builder", "Automotive Specialist", "AI & Cybersecurity Researcher"];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -105,10 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remove active style from all filtering buttons
-            filterButtons.forEach(b => b.classList.remove('active', 'bg-indigo-600', 'text-white'));
-            filterButtons.forEach(b => b.classList.add('bg-gray-100', 'dark:bg-slate-800', 'text-gray-700', 'dark:text-gray-300'));
+            filterButtons.forEach(b => {
+                b.classList.remove('active', 'bg-indigo-600', 'text-white');
+                b.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-350');
+            });
             
-            btn.classList.remove('bg-gray-100', 'dark:bg-slate-800', 'text-gray-700', 'dark:text-gray-300');
+            btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-700', 'dark:text-slate-350');
             btn.classList.add('active', 'bg-indigo-600', 'text-white');
 
             const categoryFilter = btn.getAttribute('data-filter');
