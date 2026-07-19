@@ -233,3 +233,58 @@ function revealPhone() {
         container.innerHTML = `<a href="tel:+${decoded}" class="text-sm font-bold text-slate-850 dark:text-slate-200 hover:text-indigo-600 transition-colors">+${decoded.slice(0,2)} ${decoded.slice(2,5)} ${decoded.slice(5,8)} ${decoded.slice(8)}</a>`;
     }
 }
+
+// ---- CV MODAL TOGGLE ----
+function toggleCVModal() {
+    const modal = document.getElementById('cv-modal');
+    const iframe = document.getElementById('cv-iframe');
+    
+    if (modal.classList.contains('hidden')) {
+        // Show modal
+        modal.classList.remove('hidden');
+        // Trigger reflow for transition
+        void modal.offsetWidth;
+        
+        modal.classList.remove('opacity-0');
+        modal.firstElementChild.classList.remove('scale-95');
+        modal.firstElementChild.classList.add('scale-100');
+        
+        // Load iframe if not already loaded
+        if (!iframe.src) {
+            iframe.src = "cv.html";
+        }
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    } else {
+        // Hide modal
+        modal.classList.add('opacity-0');
+        modal.firstElementChild.classList.remove('scale-100');
+        modal.firstElementChild.classList.add('scale-95');
+        
+        // Wait for transition before hiding
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }, 300);
+    }
+}
+
+// ---- CV DOWNLOAD ----
+function downloadCV() {
+    // Open cv.html in a popup window to ensure proper print rendering 
+    // and avoid iframe cross-origin or display bugs.
+    const printWindow = window.open('cv.html', '_blank', 'width=800,height=900');
+    if (printWindow) {
+        printWindow.onload = function() {
+            // Give it a moment to render external fonts/css before triggering print
+            setTimeout(() => {
+                printWindow.focus();
+                printWindow.print();
+            }, 500);
+        };
+    } else {
+        showToast('❌ Popup blocked! Please allow popups to download the CV.');
+    }
+}
