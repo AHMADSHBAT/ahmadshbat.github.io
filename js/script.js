@@ -249,13 +249,13 @@ function toggleCVModal() {
         modal.firstElementChild.classList.remove('scale-95');
         modal.firstElementChild.classList.add('scale-100');
         
-        // Load iframe if not already loaded
-        if (!iframe.src) {
-            iframe.src = "cv.html";
-        }
-        
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
+        
+        // Load iframe if not already loaded
+        if (!iframe.getAttribute('src')) {
+            iframe.setAttribute('src', 'cv.html');
+        }
     } else {
         // Hide modal
         modal.classList.add('opacity-0');
